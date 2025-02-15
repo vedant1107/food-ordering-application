@@ -13,8 +13,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import LoadingButton from "@/components/LoadingButton";
-// import { User } from "@/types";
-// import { useEffect } from "react";
+import { User } from "@/types";
+import { useEffect } from "react";
 
 // TODO: error message just showing required
 const formSchema = z.object({
@@ -28,7 +28,7 @@ const formSchema = z.object({
 export type UserFormData = z.infer<typeof formSchema>;
 
 type Props = {
-  // currentUser: User;
+  currentUser: User;
   onSave: (userProfileData: UserFormData) => void;
   isLoading: boolean;
   // title?: string;
@@ -36,20 +36,21 @@ type Props = {
 };
 
 const UserProfileForm = ({
+  currentUser,
   onSave,
   isLoading,
-}: // currentUser,
-// title = "User Profile",
+}: // title = "User Profile",
 // buttonText = "Submit",
 Props) => {
   const form = useForm<UserFormData>({
     resolver: zodResolver(formSchema),
-    // defaultValues: currentUser,
+    defaultValues: currentUser,
   });
 
-  // useEffect(() => {
-  //   form.reset(currentUser);
-  // }, [currentUser, form]);
+  // TODO: should we add form (rhf properties) to the dependencies
+  useEffect(() => {
+    form.reset(currentUser);
+  }, [currentUser, form]);
 
   return (
     <Form {...form}>
