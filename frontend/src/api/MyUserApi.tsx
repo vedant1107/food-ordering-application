@@ -33,7 +33,7 @@ export const useGetMyUser = () => {
 
   const {
     data: currentUser,
-    isPending,
+    isLoading,
     error,
   } = useQuery({
     queryKey: ["fetchCurrentUser"],
@@ -46,7 +46,7 @@ export const useGetMyUser = () => {
 
   return {
     currentUser,
-    isPending,
+    isLoading,
   };
 };
 
